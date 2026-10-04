@@ -1,0 +1,196 @@
+### Configuración base de la API
+@baseUrl = http://localhost:3000
+@contentType = application/json
+
+
+#  PRUEBAS INICIALES
+
+
+### 1. Verificar que la API está funcionando
+GET {{baseUrl}}/
+
+
+# ENDPOINTS DE USUARIOS
+
+
+### 2. Listar todos los usuarios
+GET {{baseUrl}}/api/users
+
+### 3. Obtener usuario por ID
+GET {{baseUrl}}/api/users/1
+
+### 4. Crear nuevo usuario
+POST {{baseUrl}}/api/users
+Content-Type: {{contentType}}
+
+{
+  "id": "4",
+  "name": "Pedro",
+  "lastname": "Sánchez",
+  "email": "pedro@aquanova.com",
+  "password": "password123",
+  "phone": "0945678901",
+  "role": "usuario"
+}
+
+### 5. Actualizar usuario
+PUT {{baseUrl}}/api/users/2
+Content-Type: {{contentType}}
+
+{
+  "name": "Carlos",
+  "lastname": "Rodríguez Actualizado",
+  "email": "carlos@aquanova.com",
+  "password": "user123",
+  "phone": "0912345679",
+  "role": "admin"
+}
+
+### 6. Obtener usuarios por rol (admin)
+GET {{baseUrl}}/api/users/role?role=admin
+
+### 7. Obtener usuarios por rol (usuario)
+GET {{baseUrl}}/api/users/role?role=usuario
+
+### 8. Eliminar usuario
+DELETE {{baseUrl}}/api/users/4
+
+
+# ENDPOINTS DE PRODUCTOS
+
+
+### 9. Listar todos los productos
+GET {{baseUrl}}/api/products
+
+### 10. Obtener producto por ID
+GET {{baseUrl}}/api/products/1000
+
+### 11. Crear nuevo producto
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "id": "1004",
+  "name": "Botella 3L",
+  "description": "Botella de agua purificada de 3 litros - Tamaño familiar",
+  "price": 2.00,
+  "stock": 120,
+  "image_uri": "assets/droplet-solid.png"
+}
+
+### 12. Actualizar producto
+PUT {{baseUrl}}/api/products/1000
+Content-Type: {{contentType}}
+
+{
+  "name": "Botellón 20L Premium",
+  "description": "Botellón de agua purificada de 20 litros - Calidad Premium para dispensador",
+  "price": 4.00,
+  "stock": 95,
+  "image_uri": "assets/droplet-solid.png"
+}
+
+### 13. Obtener productos disponibles (stock > 0)
+GET {{baseUrl}}/api/products/available
+
+### 14. Buscar productos
+GET {{baseUrl}}/api/products/search?query=botella
+
+### 15. Aumentar stock de producto
+PUT {{baseUrl}}/api/products/1000/stock
+Content-Type: {{contentType}}
+
+{
+  "quantity": 15,
+  "action": "increase"
+}
+
+### 16. Reducir stock de producto
+PUT {{baseUrl}}/api/products/1001/stock
+Content-Type: {{contentType}}
+
+{
+  "quantity": 5,
+  "action": "decrease"
+}
+
+### 17. Eliminar producto
+DELETE {{baseUrl}}/api/products/1004
+
+
+#  ENDPOINTS DE SUCURSALES
+
+
+### 18. Listar todas las sucursales
+GET {{baseUrl}}/api/branches
+
+### 19. Obtener sucursal por ID
+GET {{baseUrl}}/api/branches/1
+
+### 20. Crear nueva sucursal
+POST {{baseUrl}}/api/branches
+Content-Type: {{contentType}}
+
+{
+  "id": "4",
+  "name": "Sucursal Occidente",
+  "address": "Av. Occidental 500, Quito",
+  "phone": "024568901",
+  "photo_uri": "assets/location_home.png",
+  "latitude": -0.15000000,
+  "longitude": -78.52000000
+}
+
+### 21. Actualizar sucursal
+PUT {{baseUrl}}/api/branches/1
+Content-Type: {{contentType}}
+
+{
+  "name": "Sucursal Centro Actualizada",
+  "address": "Av. Principal 200, Centro Histórico",
+  "phone": "022345680",
+  "photo_uri": "assets/location_home.png",
+  "latitude": -0.18065300,
+  "longitude": -78.46783800
+}
+
+### 22. Obtener sucursales cercanas (radio 10 km)
+GET {{baseUrl}}/api/branches/nearby?latitude=-0.18065300&longitude=-78.46783800&radius=10
+
+### 23. Obtener sucursales cercanas (radio 5 km)
+GET {{baseUrl}}/api/branches/nearby?latitude=-0.18065300&longitude=-78.46783800&radius=5
+
+### 24. Buscar sucursales por dirección
+GET {{baseUrl}}/api/branches/search?query=norte
+
+### 25. Actualizar ubicación GPS de sucursal
+PUT {{baseUrl}}/api/branches/1/location
+Content-Type: {{contentType}}
+
+{
+  "latitude": -0.18500000,
+  "longitude": -78.47500000
+}
+
+### 26. Eliminar sucursal
+DELETE {{baseUrl}}/api/branches/4
+
+
+# NOTAS PARA USAR ESTE ARCHIVO
+
+
+# Este archivo es compatible con:
+# - REST Client extension en VS Code
+# - Postman (copiar/pegar cada request)
+# - Thunder Client (VS Code)
+# - Insomnia
+
+# Para usar con REST Client en VS Code:
+# 1. Instalar extensión "REST Client"
+# 2. Abrir este archivo
+# 3. Hacer click en "Send Request" o usar Ctrl+Alt+R
+
+# Asegúrate que:
+# - El servidor está corriendo en http://localhost:3000
+# - La base de datos tiene datos seed cargados
+# - Los IDs usados existen en la base de datos
